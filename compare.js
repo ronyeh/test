@@ -501,6 +501,9 @@ async function showImages(selectedImageFileName) {
   const cURL = URL.createObjectURL(cFile);
   const rURL = URL.createObjectURL(rFile);
 
+  currentContext = null;
+  referenceContext = null;
+
   currentImageElement = new Image();
   currentImageElement.src = cURL;
   currentImageElement.onload = () => {
@@ -736,7 +739,7 @@ function showVisualDiffBetweenImages() {
   diffContext = diffCanvas.getContext('2d');
 
   const diffImage = diffContext.createImageData(maxW, maxH);
-  diffHelperFunction(c.data, r.data, diffImage.data, maxW, maxH, { threshold: 0.1 });
+  diffHelperFunction(c.data, r.data, diffImage.data, maxW, maxH, { threshold: 0.05 });
 
   diffContext.putImageData(diffImage, 0, 0);
   imagesContainer.appendChild(diffCanvas);
